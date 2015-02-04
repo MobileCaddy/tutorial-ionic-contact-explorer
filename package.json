@@ -1,7 +1,7 @@
 {
   "name": "mobilecaddy-shell-ionic",
   "version": "0.0.1",
-  "sf_app_name" : "ShellApp",
+  "sf_app_name" : "MC_ContactsExplorer",
   "mc_utils_resource" : "mc_package_002__MC_Resource_001",
   "devDependencies": {
     "grunt": ">=0.4.5",
