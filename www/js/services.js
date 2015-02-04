@@ -99,6 +99,17 @@ angular.module('starter.services', ['underscore'])
           reject(resObject);
         });
       });
+    },
+    add: function(c){
+      return new Promise(function(resolve, reject) {
+        devUtils.insertRecord('Contact__ap', c).then(function(resObject){
+          // perform background sync - we're not worried about Promise resp.
+          devUtils.syncMobileTable('Contact__ap');
+          resolve(resObject);
+        }).catch(function(e){
+          reject(e);
+        });
+      });
     }
   };
 })

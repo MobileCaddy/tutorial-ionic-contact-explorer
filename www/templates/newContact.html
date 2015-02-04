@@ -1,0 +1,40 @@
+<ion-viewtitle="New Contact">
+  <ion-content>
+    <form name="contactForm" ng-controller="AccountDetailCtrl" ng-submit="addContact()">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Account</span>
+          <input type="text" disabled value="{{account.Name}}"/>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">First Name</span>
+          <input type="text" ng-model="c.FirstName" placeholder="John" required/>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Last Name</span>
+          <input type="text" ng-model="c.LastName"  placeholder="Smith" required/>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="c.Title"  placeholder="Account Manager" />
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Mobile</span>
+          <input type="number" ng-model="c.MobilePhone"  placeholder="+447957 123456" />
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="c.Email" placeholder="john.smith@company.com" required/>
+        </label>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button-full button icon-left ion-checkmark button-positive {{submitAllowedClass}}"  ng-disabled="contactForm.$invalid">Submit</button>
+        </div>
+        <div class="col">
+          <a class="button-full button icon-left ion-close button-assertive" href="#/tab/account/{{account.Id}}">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

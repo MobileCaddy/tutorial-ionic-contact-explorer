@@ -1,5 +1,14 @@
 angular.module('starter.controllers', ['ionic'])
 
+
+/**
+ * encodeUri filter - needed to encode MC_Proxy_IDs for use in URLs
+ */
+.filter('encodeUri', function() {
+    return function(x) {
+      return encodeURIComponent(x);
+  };
+})
   /*
   ===========================================================================
     A C C O U N T
@@ -73,6 +82,33 @@ angular.module('starter.controllers', ['ionic'])
   }, function(e) {
     console.error('error', angular.toJson(e));
   });
+
+  $scope.addContact = function() {
+    console.log('c', $scope.c);
+    var c = $scope.c;
+    c.AccountId = $stateParams.accountId;
+    c.Name = c.FirstName + ' ' + c.LastName;
+    $ionicLoading.show({
+      template: '<h1>Saving...</h1><p>Saving contact...</p><i class="icon ion-loading-b" style="font-size: 32px"></i>',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 600,
+      duration: 30000
+    });
+    ContactService.add(c).then(function(res) {
+      $ionicLoading.hide();
+      window.history.back();
+    }).catch(function(e) {
+      console.error('addContact failed',e);
+      $ionicLoading.hide();
+      var alertPopup = $ionicPopup.alert({
+        title: 'Add Contact Failed!',
+        template: '<p>Sorry, something went wrong.</p><p class="error_details">Error: ' +
+          e.status + ' - ' + e.mc_add_status + '</p>'
+      });
+    });
+  };
+
 })
 
 /*
