@@ -8,6 +8,7 @@
 
       <ion-item class="item mti-item"
         collection-repeat="contact in contacts | filter:query" type="item-text-wrap"
+        href="#/tab/account/{{account.Id}}/contact/{{contact.Id}}"
         collection-item-width="'100%'"
         collection-item-height="getItemHeight(contact, $index)"
         ng-style="{height: getItemHeight(contact, $index)}"

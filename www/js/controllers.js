@@ -100,8 +100,17 @@ console.debug('ContactCtrl');
   };
 
   ContactService.get().then(function(contacts) {
-    $scope.contacts = contacts;
-    $scope.$apply();
+    if (typeof($stateParams.contactId) != "undefined") {
+      // viewing single contact so also need to get Account Name
+      AccountService.get(contacts[0].AccountId).then(function(account){
+        contacts[0].AccountName = account.Name;
+        $scope.contact = contacts[0];
+        $scope.$apply();
+      });
+    } else {
+      $scope.contacts = contacts;
+      $scope.$apply();
+    }
   }).catch(function(e) {
     console.error('error', angular.toJson(e));
   });

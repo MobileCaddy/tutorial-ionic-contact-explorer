@@ -86,7 +86,14 @@ angular.module('starter.services', ['underscore'])
       return new Promise(function(resolve, reject) {
         devUtils.readRecords('Contact__ap', []).then(function(resObject) {
           var contacts = [];
-          contacts = _.where(resObject.records, {'AccountId': $stateParams.accountId });
+          if (typeof($stateParams.contactId) != "undefined") {
+           contact = _.where(resObject.records, {'Id': $stateParams.contactId });
+           resolve(contact);
+          } else if (typeof($stateParams.accountId) != "undefined") {
+           contacts = _.where(resObject.records, {'AccountId': $stateParams.accountId });
+          } else {
+            contacts = resObject.records;
+          }
           resolve(contacts);
         }).catch(function(resObject){
           reject(resObject);

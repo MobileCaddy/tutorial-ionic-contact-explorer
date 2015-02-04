@@ -36,6 +36,15 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
       }
     })
     
+    .state('tab.accounts-contact-detail', {
+      url: '/account/:accountId/contact/:contactId',
+      views: {
+        'accounts-tab': {
+          templateUrl: RESOURCE_ROOT + 'templates/contactDetail.html'
+        }
+      }
+    })
+
     /** ***************************************************
      * S E T T I N G S    &    D E V    T O O L S
      *************************************************** */
