@@ -1,8 +1,17 @@
-# MobileCaddy Shell App - Angular/Ionic
+# MobileCaddy Tutorial App - Salesforce Account/Contact Explorer - Angular/Ionic
 
 ## Overview
 
-This is the basic shell application built with [Angular JS](https://angularjs.org/) and the [Ionic Framework](http://ionicframework.com). The idea of the MobileCaddy shell applications are to give developers a barebones starting block in getting building hybrid mobile applications with MobileCaddy.
+This is a repo to accompany the MobileCaddy tutorial on building an offline ready Accounts and Contcat explorer for Salesforce. The Tutorial can be found [here](http://developer.mobilecaddy.net/docs/tutorials/accounts-contact-explorer)
+
+The code here can be used as a guide to what the code should look like after each module in the tutorial. It has branches at each step of the tutorial;
+* tut/0
+* tut/1
+* tut/3
+* tut/3
+* tut/4
+* tut/5
+* tut/6
 
 ## Getting Started
 
@@ -14,17 +23,17 @@ This is the basic shell application built with [Angular JS](https://angularjs.or
  * sass
 
 
-* Download the [zip](https://github.com/MobileCaddy/shell-ionic/archive/master.zip) and unzip
+* Clone the repo and install the dependencies
 
 ```
-mv shell-ionic-master shell-ionic
-cd shell-ionic
+git clone https://github.com/MobileCaddy/tutorial-ionic-contact-explorer.git
+cd tutorial-ionic-contact-explorer
 ```
 
 ## What you get (prior to running any installs/grunt tasks)
 
 ```
-├── apex-templates		## Templates for the platform's startpage and cache manifest
+├── apex-templates	  ## Templates for the platform's startpage and cache manifest
 ├── bower.json        ## Defines dependencies (MobileCaddy, Ionic)
 ├── Gruntfile.js      ## Defines our task automation
 ├── package.json      ## The node package file and core app configuration
