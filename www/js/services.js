@@ -21,14 +21,33 @@ angular.module('starter.services', ['underscore'])
   }
   
   function getAccounts(refreshFlag, callback) {
+    var firstStartUp = (typeof $rootScope.firstStartUp == 'undefined' || $rootScope.firstStartUp === true);
     return new Promise(function(resolve, reject) {
-      devUtils.syncMobileTable('Account__ap').then(function(resObject){
-        return getAccountsFromSmartStore();
-      }).then(function(accounts){
-        resolve(accounts);
-      }).catch(function(resObject){
+      if (refreshFlag || firstStartUp) {
+        $rootScope.firstStartUp = false;
+        if (typeof(callback) != "undefined") {
+          // get local accounts return through callback
+          // this will mean our local accounts will be shown intially to improve the UI
+          getAccountsFromSmartStore()
+            .then(function(accounts) {
+              callback(accounts);
+          });
+        }
+        devUtils.syncMobileTable('Account__ap').then(function(resObject){
+          return getAccountsFromSmartStore();
+        }).then(function(accounts){
+          resolve(accounts);
+        }).catch(function(resObject){
+            reject(resObject);
+        });
+      } else { // not first start or refresh
+        // just get our data from the local
+        getAccountsFromSmartStore().then(function(accounts) {
+          resolve(accounts);
+        }).catch(function(resObject) {
           reject(resObject);
-      });
+        });
+      }
     });
   }
 

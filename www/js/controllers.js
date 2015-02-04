@@ -48,6 +48,17 @@ angular.module('starter.controllers', ['ionic'])
   $scope.getItemHeight = function(item, index) {
     return 50;
   };
+
+    /**
+   * Called upon "Pull to Refresh"
+   */
+  $scope.doRefreshAccounts = function() {
+    AccountService.all(true).then(function(accounts) {
+      $scope.accounts = accounts;
+    }).catch(function(e) {
+      console.error('error', angular.toJson(e));
+    });
+  };
 })
 
   /*

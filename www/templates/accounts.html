@@ -1,9 +1,19 @@
  <ion-view title="Accounts">
   <ion-content>
+    <ion-refresher on-refresh="doRefreshAccounts()"
+                     pulling-text="Pull to refresh..."
+                     refreshing-text="Refreshing!"
+                     refreshing-icon="ion-loading-c">
+    </ion-refresher>
      <ion-list>
 
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" ng-model="query" />
+      </label>
+      
       <ion-item class="item mti-item"
-        collection-repeat="account in accounts" type="item-text-wrap"
+        collection-repeat="account in accounts | filter:query" type="item-text-wrap"
         collection-item-width="'100%'"
         collection-item-height="getItemHeight(tableRec, $index)"
         ng-style="{height: getItemHeight(tableRec, $index)}"
