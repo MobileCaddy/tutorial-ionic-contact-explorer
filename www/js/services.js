@@ -5,6 +5,41 @@ var underscore = angular.module('underscore', []);
 
 angular.module('starter.services', ['underscore'])
 
+.factory('AccountService', function($rootScope, $q, _) {
+  var devUtils = mobileCaddy.require('mobileCaddy/devUtils');
+
+  function getAccountsFromSmartStore() {
+    return new Promise(function(resolve, reject) {
+      devUtils.readRecords('Account__ap', []).then(function(resObject) {
+        records = resObject.records;
+        $rootScope.$broadcast('scroll.refreshComplete');
+        resolve(resObject.records);
+      }).catch(function(resObject){
+        reject(resObject);
+      });
+    });
+  }
+  
+  function getAccounts(refreshFlag, callback) {
+    return new Promise(function(resolve, reject) {
+      devUtils.syncMobileTable('Account__ap').then(function(resObject){
+        return getAccountsFromSmartStore();
+      }).then(function(accounts){
+        resolve(accounts);
+      }).catch(function(resObject){
+          reject(resObject);
+      });
+    });
+  }
+
+  return {
+    all: function(refreshFlag, callback) {
+      return  getAccounts(refreshFlag, callback);
+    }
+  };
+
+})
+
   /*
   ===========================================================================
     M O B I L C A D D Y     S E T T I N G S

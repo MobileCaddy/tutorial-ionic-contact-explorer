@@ -16,6 +16,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
       templateUrl: RESOURCE_ROOT +  'templates/tabsMain.html'
     })
 
+    // the account tab has its own child nav-view and history
+    .state('tab.accounts', {
+      url: '/accounts',
+      views: {
+        'accounts-tab': {
+          templateUrl: RESOURCE_ROOT + 'templates/accounts.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    })
 
     /** ***************************************************
      * S E T T I N G S    &    D E V    T O O L S

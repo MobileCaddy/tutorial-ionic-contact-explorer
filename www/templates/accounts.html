@@ -1,0 +1,16 @@
+ <ion-view title="Accounts">
+  <ion-content>
+     <ion-list>
+
+      <ion-item class="item mti-item"
+        collection-repeat="account in accounts" type="item-text-wrap"
+        collection-item-width="'100%'"
+        collection-item-height="getItemHeight(tableRec, $index)"
+        ng-style="{height: getItemHeight(tableRec, $index)}"
+        >
+        <h3>{{account.Name}}</h3>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-view>

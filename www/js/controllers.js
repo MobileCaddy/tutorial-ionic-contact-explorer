@@ -2,6 +2,56 @@ angular.module('starter.controllers', ['ionic'])
 
   /*
   ===========================================================================
+    A C C O U N T
+  ===========================================================================
+  */
+.controller('AccountCtrl', function($scope, $rootScope, $ionicLoading, AccountService) {
+
+  // Setup the loader
+  $ionicLoading.show({
+    template: '<h1>Loading...</h1><p>Fetching Accounts...</p><p><i class="icon ion-loading-b" style="font-size: 32px"></i>',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 600,
+    duration: 30000
+  });
+
+  /**
+   * A callback function that is called when a set of localstorage details are
+   * returned.
+   * @param  {[Account Objects]} localAccounts
+   */
+  var localAccCB = function(localAccounts) {
+    $rootScope.accounts = localAccounts;
+    console.log('Angular: localProjCB, got accounts with arr len', localAccounts.length);
+    if (localAccounts.length > 0){
+      $ionicLoading.hide();
+    }
+  };
+
+  AccountService.all($rootScope.refreshFlag, localAccCB).then(function(accounts) {
+    $scope.accounts = accounts;
+    console.log('AccountIndexCtrl, got accounts');
+    $ionicLoading.hide();
+  }, function(e) {
+    console.error('error', angular.toJson(e));
+  });
+  $rootScope.refreshFlag = false;
+
+
+  /**
+   * Returns a height for an Account list item
+   * @param  {object} item  Account
+   * @param  {integer} index
+   * @return {integer} pixels
+   */
+  $scope.getItemHeight = function(item, index) {
+    return 50;
+  };
+})
+
+  /*
+  ===========================================================================
     M O B I L C A D D Y     S E T T I N G S
   ===========================================================================
   */
