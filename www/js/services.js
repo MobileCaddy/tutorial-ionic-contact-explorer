@@ -37,6 +37,8 @@ angular.module('starter.services', ['underscore'])
           return getAccountsFromSmartStore();
         }).then(function(accounts){
           resolve(accounts);
+          // kick off sync on 'Contact__ap' table also
+          devUtils.syncMobileTable('Contact__ap', refreshFlag);
         }).catch(function(resObject){
             reject(resObject);
         });
@@ -54,10 +56,46 @@ angular.module('starter.services', ['underscore'])
   return {
     all: function(refreshFlag, callback) {
       return  getAccounts(refreshFlag, callback);
+    },
+
+    get: function(accountId){
+      return new Promise(function(resolve, reject) {
+        devUtils.readRecords('Account__ap', []).then(function(resObject) {
+          var account = _.findWhere(resObject.records, {'Id': accountId });
+          resolve(account);
+        }).catch(function(resObject){
+          reject(resObject);
+        });
+      });
     }
   };
 
 })
+
+
+/*
+===========================================================================
+  C O N T A C T
+===========================================================================
+*/
+.factory('ContactService', function($rootScope, $stateParams, $q, _) {
+  var devUtils = mobileCaddy.require('mobileCaddy/devUtils');
+
+  return{
+    get : function(){
+      return new Promise(function(resolve, reject) {
+        devUtils.readRecords('Contact__ap', []).then(function(resObject) {
+          var contacts = [];
+          contacts = _.where(resObject.records, {'AccountId': $stateParams.accountId });
+          resolve(contacts);
+        }).catch(function(resObject){
+          reject(resObject);
+        });
+      });
+    }
+  };
+})
+
 
   /*
   ===========================================================================

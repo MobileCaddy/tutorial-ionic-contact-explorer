@@ -61,6 +61,52 @@ angular.module('starter.controllers', ['ionic'])
   };
 })
 
+
+/*
+===========================================================================
+  A C C O U N T    D E T A I L
+===========================================================================
+*/
+.controller('AccountDetailCtrl', function($scope, $stateParams, AccountService) {
+  AccountService.get($stateParams.accountId).then(function(account) {
+    $scope.account = account;
+  }, function(e) {
+    console.error('error', angular.toJson(e));
+  });
+})
+
+/*
+===========================================================================
+  C O N T A C T S
+===========================================================================
+*/
+.controller('ContactCtrl', function($scope, $stateParams, $ionicLoading, AccountService,ContactService) {
+console.debug('ContactCtrl');
+
+  /**
+   * Returns a height for a contact list item
+   * @param  {object} item  Contact
+   * @param  {integer} index
+   * @return {integer} pixels
+   */
+  $scope.getItemHeight = function(item, index) {
+    if (typeof(item) == "undefined") {
+      return 0;
+    } else if (item.Title !== "") {
+      return 74;
+    } else {
+      return 50;
+    }
+  };
+
+  ContactService.get().then(function(contacts) {
+    $scope.contacts = contacts;
+    $scope.$apply();
+  }).catch(function(e) {
+    console.error('error', angular.toJson(e));
+  });
+})
+
   /*
   ===========================================================================
     M O B I L C A D D Y     S E T T I N G S
