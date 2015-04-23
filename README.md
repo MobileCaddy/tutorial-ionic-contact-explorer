@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a repo to accompany the MobileCaddy tutorial on building an offline ready Accounts and Contcat explorer for Salesforce. The Tutorial can be found [here](http://developer.mobilecaddy.net/docs/tutorials/accounts-contact-explorer)
+This is a repo to accompany the MobileCaddy tutorial on building an offline ready Accounts and Contact explorer for Salesforce. The Tutorial can be found [here](http://developer.mobilecaddy.net/docs/tutorials/accounts-contact-explorer)
 
 The code here can be used as a guide to what the code should look like after each module in the tutorial. It has branches at each step of the tutorial;
 * tut/0
@@ -49,7 +49,7 @@ cd tutorial-ionic-contact-explorer
     └── templates
 ```
 
-* Install the required packages and dependencies (not you might need `sudo npm install` below)
+* Install the required packages and dependencies (note: you might need `sudo npm install` below)
 
 ```
 npm install
