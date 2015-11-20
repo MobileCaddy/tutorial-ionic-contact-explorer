@@ -5,8 +5,8 @@
 *.zip
 
 node_modules
-bower_components
 tmp
+codeflow
 dest
 www/js/*.log
 .sass-cache
@@ -14,9 +14,14 @@ www/js/*.log
 # ignore app.css as this is created by the sass
 www/css/app.*
 
+# ignore automagically created files
+www/index.html
+www/js/services.js
+www/js/controllers.js
 
-# Mock and bower stuff
-www/lib/js/*
+# Mock and dep stuff
+www/lib/js/ionic.bundle.min.js
+www/lib/js/ng-cordova.min.js
 www/fonts/ionicons*
 scss/ionic
 oauthcallback.html

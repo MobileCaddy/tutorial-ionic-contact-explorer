@@ -1,4 +1,4 @@
-<apex:page showHeader="false" standardStylesheets="false" contentType="text/cache-manifest">CACHE MANIFEST
+<apex:page showHeader="false" standardStylesheets="false" contentType="text/cache-manifest" controller="mobilecaddy1.StartPageCacheCtrl001_mc">CACHE MANIFEST
 
 NETWORK:
 *
@@ -13,11 +13,10 @@ CACHE:
 
 #SECTION 1B MOBILECADDY CACHED JS
 
-/jslibrary/1416323438000/sfdc/VFRemote.js
+{!vfremotepath}
 /static/111213/js/perf/stub.js
 {!URLFOR($Resource.MC_UTILS_RESOURCE, 'jquery.min.js')}
-{!URLFOR($Resource.mc_package_002__iosCordova220)}
-{!URLFOR($Resource.mc_package_002__androidCordova220)}
+{!URLFOR($Resource.mobilecaddy1__cordovaSF3v1)}
 {!URLFOR($Resource.MC_UTILS_RESOURCE, 'mobilecaddy-utils.min.js')}
 {!URLFOR($Resource.MC_UTILS_RESOURCE, 'promise-1.0.0.min.js')}
 {!URLFOR($Resource.MC_UTILS_RESOURCE, 'underscore-min.js')}
