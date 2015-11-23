@@ -57,6 +57,26 @@
 	    }
 	  };
 
+
+    /**
+	   * Called upon "Pull to Refresh"
+	   */
+	  $scope.doRefreshFromPulldown = function() {
+	    AccountService.all(true).then(function(accounts) {
+	      $scope.accounts = accounts;
+	    }).catch(function(e) {
+	      console.error('error', angular.toJson(e));
+	    });
+	  };
+
+    $scope.search = {};
+	  /**
+	   * Called when clearing the Search input
+	   */
+	  $scope.clearSearch = function() {
+	    $scope.search.query = "";
+	  };
+
   }
 
 })();
