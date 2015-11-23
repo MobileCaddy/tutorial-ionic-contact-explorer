@@ -49,14 +49,17 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
     })
 
 
-  .state('tab.home', {
-      url: '/home',
+  // the account tab has its own child nav-view and history
+    .state('tab.accounts', {
+      url: '/accounts',
       views: {
-        'home-tab': {
-          templateUrl: RESOURCE_ROOT +  'templates/home.html',
+        'accounts-tab': {
+          templateUrl: RESOURCE_ROOT + 'templates/accounts.html',
+          controller: 'AccountsCtrl'
         }
       }
     })
+
 
     /*****************************************************
      * S E T T I N G S    &    D E V    T O O L S
@@ -131,7 +134,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
   //
   // ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/settings');
+  $urlRouterProvider.otherwise('/tab/accounts');
 
 }]);
 
