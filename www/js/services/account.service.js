@@ -16,7 +16,18 @@
   function AccountService($rootScope, devUtils) {
 
   	return {
-	    all: getAccounts
+	    all: getAccounts,
+
+	    get: function(accountId){
+      return new Promise(function(resolve, reject) {
+        devUtils.readRecords('Account__ap', []).then(function(resObject) {
+          var account = _.findWhere(resObject.records, {'Id': accountId });
+          resolve(account);
+        }).catch(function(resObject){
+          reject(resObject);
+        });
+      });
+    }
 	  };
 
 	  /**
@@ -51,6 +62,8 @@
 	        	// we now have our updated accounts from SFDC and the smartstore
 	        	// so send back in the promise resolution.
 	          resolve(accounts);
+	          // kick off sync on 'Contact__ap' table
+	          devUtils.syncMobileTable('Contact__ap', refreshFlag);
 	        }).catch(function(resObject){
 	            reject(resObject);
 	        });

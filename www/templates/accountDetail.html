@@ -1,0 +1,22 @@
+<ion-view ng-controller="AccountDetailCtrl" cache-view="false">
+  <ion-nav-title>
+    {{account.Name}} Contacts
+  </ion-nav-title>
+  <ion-content>
+
+    <ion-list  ng-controller="ContactsCtrl">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" ng-model="query" />
+      </label>
+
+      <ion-item class="item mti-item"
+        collection-repeat="contact in contacts | filter:query" type="item-text-wrap"
+        >
+        <h3>{{contact.Name}}</h3>
+        <p>{{contact.Title}}</p>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

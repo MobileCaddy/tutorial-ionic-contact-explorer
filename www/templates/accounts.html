@@ -16,6 +16,7 @@
 
       <ion-item class="item"
         collection-repeat="account in accounts | filter:search.query" type="item-text-wrap"
+        href="#/tab/account/{{account.Id}}"
         >
         <h3>{{account.Name}}</h3>
       </ion-item>
