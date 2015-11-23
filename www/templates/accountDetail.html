@@ -2,6 +2,10 @@
   <ion-nav-title>
     {{account.Name}} Contacts
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a href="#/tab/account/{{account.Id}}/contact" class="button button-icon icon ion-person-add">
+    </a>
+  </ion-nav-buttons>
   <ion-content>
 
     <ion-list  ng-controller="ContactsCtrl">
@@ -12,7 +16,7 @@
 
       <ion-item class="item"
         collection-repeat="contact in contacts | filter:query" type="item-text-wrap"
-        href="#/tab/account/{{account.Id}}/contact/{{contact.Id}}"
+        href="#/tab/account/{{account.Id}}/contact/{{contact.Id | encodeUri}}"
         >
         <h3>{{contact.Name}}</h3>
         <p>{{contact.Title}}</p>

@@ -16,8 +16,25 @@
 
   function ContactsService(_, devUtils) {
   	return {
-  		get: get
+  		get: get,
+      add: add
 	  };
+
+    /**
+     * Adds a contact c
+     * @param {object} c Our contact object
+     */
+    function add(c) {
+      return new Promise(function(resolve, reject) {
+        devUtils.insertRecord('Contact__ap', c).then(function(resObject){
+          // perform background sync - we're not worried about Promise resp.
+          devUtils.syncMobileTable('Contact__ap');
+          resolve(resObject);
+        }).catch(function(e){
+          reject(e);
+        });
+      });
+    }
 
 	  /**
 	   * @description Gets the list of contacts for a particular account, or gets
@@ -34,10 +51,10 @@
         	// we want.
           var contacts = [];
           if (typeof(contactId) != "undefined") {
-           contact = _.where(resObject.records, {'Id': contactId });
-           resolve(contact);
+            var contact = _.where(resObject.records, {'Id': contactId });
+            resolve(contact);
           } else if (typeof(accountId) != "undefined") {
-           contacts = _.where(resObject.records, {'AccountId': accountId });
+            contacts = _.where(resObject.records, {'AccountId': accountId });
           } else {
             contacts = resObject.records;
           }

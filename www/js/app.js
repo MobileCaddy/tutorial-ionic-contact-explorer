@@ -80,6 +80,15 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
       }
     })
 
+    .state('tab.accounts-newContact', {
+      url: '/account/:accountId/contact',
+      views: {
+        'accounts-tab': {
+          templateUrl: RESOURCE_ROOT + 'templates/newContact.html'
+        }
+      }
+    })
+
     /*****************************************************
      * S E T T I N G S    &    D E V    T O O L S
      ****************************************************/
