@@ -5,13 +5,12 @@
 This is a repo to accompany the MobileCaddy tutorial on building an offline ready Accounts and Contact explorer for Salesforce. The Tutorial can be found [here](http://developer.mobilecaddy.net/docs/tutorials/accounts-contact-explorer)
 
 The code here can be used as a guide to what the code should look like after each module in the tutorial. It has branches at each step of the tutorial;
-* tut/0
-* tut/1
-* tut/3
-* tut/3
-* tut/4
-* tut/5
-* tut/6
+* tutorial/0
+* tutorial/1
+* tutorial/3
+* tutorial/3
+* tutorial/4
+* tutorial/5
 
 ## Getting Started
 
