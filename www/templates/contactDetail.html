@@ -1,0 +1,19 @@
+<ion-view ng-controller="ContactsCtrl">
+  <ion-nav-title>{{contact.Name}}</ion-nav-title>
+  <ion-content>
+    <div class="list card">
+
+      <div class="item">
+	      <h2>{{contact.AccountName}}</h2>
+	      <p>{{contact.Title}}</p>
+	    </div>
+	    <div ng-if="contact.MobilePhone" class="item">
+	      {{contact.MobilePhone}}
+	    </div>
+	    <div ng-if="contact.Email" class="item">
+	      {{contact.Email}}
+	    </div>
+
+    </div>
+  </ion-content>
+</ion-view>

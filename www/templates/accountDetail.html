@@ -10,8 +10,9 @@
         <input type="text" ng-model="query" />
       </label>
 
-      <ion-item class="item mti-item"
+      <ion-item class="item"
         collection-repeat="contact in contacts | filter:query" type="item-text-wrap"
+        href="#/tab/account/{{account.Id}}/contact/{{contact.Id}}"
         >
         <h3>{{contact.Name}}</h3>
         <p>{{contact.Title}}</p>
