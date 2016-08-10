@@ -15,18 +15,15 @@
 
 	function SyncService($rootScope, devUtils, LocalNotificationService, UserService) {
 
-		// Just a guess at the record age that is acceptable to be on the device
-		// Set as needed for your use case
-		var fourHours = 1000 * 60 * 60 * 4; // 4 hours in milliseconds
+		var fiveMins = 1000 * 60 * 5; // 5 Minutes in ms
 
 		// This is where you put your list of tables that you want from the platform
 		var appTables = [
-			{'Name': 'myDummyTable1__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fourHours},
-			{'Name': 'myDummyTable2__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fourHours}
+			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fiveMins}
 		];
 
 		var appTablesSyncNow = [
-			{'Name': 'myDummyTable1__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : 0}
+			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : 0}
 		];
 
 
