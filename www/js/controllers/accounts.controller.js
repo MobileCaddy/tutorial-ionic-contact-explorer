@@ -43,7 +43,7 @@
 		  	template: '<p>Fetching accounts...</p><ion-spinner/>',
 		  	animation: 'fade-in',
 		  	showBackdrop: true,
-		  	duration: 3000,
+		  	duration: 120000,
 		   	delay : 400
 			});
 

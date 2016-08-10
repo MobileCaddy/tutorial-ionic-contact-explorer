@@ -1,0 +1,24 @@
+<ion-view ng-controller="AccountCtrl" cache-view="false">
+  <ion-nav-title>
+    {{::vm.account.Name}} Contacts
+  </ion-nav-title>
+  <ion-content>
+		<ion-list  ng-controller="ContactsCtrl as vmc">
+
+			<div class="item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-search placeholder-icon"></i>
+			    <input type="search" placeholder="Search" ng-model="vmc.search.query">
+			  </label>
+			  <button class="button button-clear icon ion-close-round" ng-click="vmc.clearSearch()"></button>
+			</div>
+
+      <ion-item class="item mti-item"
+        collection-repeat="contact in vmc.contacts | filter:vmc.search.query" type="item-text-wrap"
+        >
+        <h3>{{contact.Name}}</h3>
+        <p>{{contact.Title}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

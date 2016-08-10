@@ -14,7 +14,9 @@
 
   function AccountsService(devUtils, logger, UserService) {
   	return {
-  		all: all
+  		all: all,
+
+  		get: get
 	  };
 
 		/**
@@ -44,6 +46,24 @@
 					reject(resObject);
 				});
      });
+	  }
+
+
+	  /**
+	   * @function get
+	   * @description Gets an account by it's ID
+	   * @param  {string} id Id of our account
+	   * @return {promise}    resolves to an account object
+	   */
+	  function get(id){
+	  	return new Promise(function(resolve, reject) {
+        var smartSql = "SELECT * from {Account__ap} WHERE {Account__ap:Id} = '" + id + "'";
+        devUtils.smartSql(smartSql).then( function(resObject) {
+          resolve(resObject.records[0]);
+        }).catch(function(resObject){
+          reject(resObject);
+        });
+      });
 	  }
 
   }

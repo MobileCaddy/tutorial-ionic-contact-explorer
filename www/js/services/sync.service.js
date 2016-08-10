@@ -19,11 +19,13 @@
 
 		// This is where you put your list of tables that you want from the platform
 		var appTables = [
-			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fiveMins}
+			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fiveMins},
+			{'Name': 'Contact__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : fiveMins}
 		];
 
 		var appTablesSyncNow = [
-			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : 0}
+			{'Name': 'Account__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : 0},
+			{'Name': 'Contact__ap', 'syncWithoutLocalUpdates': true, 'maxTableAge' : 0}
 		];
 
 
@@ -146,7 +148,7 @@
 		function coldStartSync() {
 			return new Promise(function(resolve, reject) {
 				//console.log("coldStartSync");
-				var myAppTables = [{'Name': 'Mobile_Log__mc', 'syncWithoutLocalUpdates': false, 'maxTableAge' : fourHours}].concat(appTables);
+				var myAppTables = [{'Name': 'Mobile_Log__mc', 'syncWithoutLocalUpdates': false, 'maxTableAge' : fiveMins}].concat(appTables);
 				syncTables(myAppTables).then(function(resObject){
 					//console.log('coldStartSync', resObject);
 					resolve(resObject);
@@ -168,7 +170,7 @@
 		function syncAllTables() {
 			return new Promise(function(resolve, reject) {
 				var myAppTables = appTables;
-				myAppTables.push({'Name': 'Mobile_Log__mc', 'syncWithoutLocalUpdates': false, 'maxTableAge' : fourHours});
+				myAppTables.push({'Name': 'Mobile_Log__mc', 'syncWithoutLocalUpdates': false, 'maxTableAge' : fiveMins});
 				syncTables(myAppTables).then(function(resObject){
 					//console.log('syncAllTables', resObject);
 					resolve(resObject);
