@@ -17,14 +17,35 @@
   	var contact;
 
   	return {
+      add: add,
+
   		get: get,
 
   		getForAccount: getForAccount
 	  };
 
 
-
 	  /**
+     * @function add
+     * @description Adds a contact, c, through the MobileCaddy API. Following
+     *              a successful insert it also calls a sync to SFDC.
+     * @param {object} c Our contact object
+     * @return {promise} Resolves to a success, or rejects an error object3
+     */
+    function add(c) {
+      return new Promise(function(resolve, reject) {
+        devUtils.insertRecord('Contact__ap', c).then(function(resObject){
+          // perform background sync - we're not worried about Promise resp.
+          devUtils.syncMobileTable('Contact__ap');
+          resolve(resObject);
+        }).catch(function(e){
+          reject(e);
+        });
+      });
+    }
+
+
+    /**
 	   * @function get
 	   * @description Gets single contact with ID id and enriches with Name from
 	   *              related account

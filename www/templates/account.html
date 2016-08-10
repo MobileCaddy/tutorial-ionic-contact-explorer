@@ -2,6 +2,13 @@
   <ion-nav-title>
     {{::vm.account.Name}} Contacts
   </ion-nav-title>
+
+  <ion-nav-buttons side="right">
+    <a href="#/tab/account/{{::vm.account.Id}}/contact" class="button button-icon icon ion-person-add">
+    </a>
+    <mc-sync-spinner></mc-sync-spinner>
+  </ion-nav-buttons>
+
   <ion-content>
 		<ion-list  ng-controller="ContactsCtrl as vmc">
 
@@ -15,7 +22,7 @@
 
       <ion-item class="item mti-item"
         collection-repeat="contact in vmc.contacts | filter:vmc.search.query" type="item-text-wrap"
-        href="#/tab/account/{{vm.account.Id}}/contact/{{contact.Id}}"
+        href="#/tab/account/{{vm.account.Id}}/contact/{{contact.Id | encodeUri}}"
         >
         <h3>{{contact.Name}}</h3>
         <p>{{contact.Title}}</p>
