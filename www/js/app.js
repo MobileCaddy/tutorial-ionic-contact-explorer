@@ -1,7 +1,7 @@
 
-angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 'starter.controllers'])
+angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 'starter.controllers', 'ngCordova'])
 
-.run(['$ionicPlatform', 'NetworkService', 'AppRunStatusService', function($ionicPlatform, NetworkService, AppRunStatusService) {
+.run(['$ionicPlatform', 'NetworkService', 'AppRunStatusService', 'UserService', 'SyncService' , function($ionicPlatform, NetworkService, AppRunStatusService, UserService, SyncService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -26,15 +26,54 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
       NetworkService.networkEvent('offline');
     }, false);
 
+
+    // Local notifications plugin event handlers -  uncomment if you want them
+    // and make sure you inject the service
+    //
+    // if (cordova && cordova.plugins && cordova.plugins.notification) {
+    //   // Notification has reached its trigger time
+    //   cordova.plugins.notification.local.on("trigger", function (notification, state) {
+    //     LocalNotificationService.handleLocalNotification(notification.id, state);
+    //   });
+    //   // Event fired when user taps on notification
+    //   cordova.plugins.notification.local.on("click", function (notification, state) {
+    //     LocalNotificationService.handleLocalNotificationClick(notification.id, state);
+    //   });
+    // }
+
+
     // Example of locking the screen orientation to landscape
     // if (screen && screen.lockOrientation) {
     //   screen.lockOrientation('landscape');
     // }
 
   });
+
+  // Check if the intialSync process has been run. This is the process that pulls
+  // down the data on the first run up to ensure offline first capability
+  //
+  // In the below case we also do a coldStartSync if we are starting but not for
+  // the first time
+  UserService.hasDoneProcess("initialDataLoaded").then(function (result) {
+    if (result) {
+      // Ensure that the syncTables will run
+      SyncService.setSyncLock("false");
+      SyncService.setSyncState("Complete");
+      SyncService.coldStartSync();
+    } else {
+      NetworkService.setNetworkStatus("online");
+      // Initial install and load of data => initialSync lighter-weight sync call.
+      SyncService.initialSync();
+    }
+  });
+
 }])
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$compileProvider', function($stateProvider, $urlRouterProvider, $compileProvider) {
+
+  // Un comment this line when pushing for prod.
+  // $compileProvider.debugInfoEnabled(false);
+
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -49,45 +88,26 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
     })
 
 
-    // the account tab has its own child nav-view and history
-    .state('tab.accounts', {
-      url: '/accounts',
+  .state('tab.home', {
+      url: '/home',
       views: {
-        'accounts-tab': {
-          templateUrl: RESOURCE_ROOT + 'templates/accounts.html',
-          controller: 'AccountsCtrl'
+        'home-tab': {
+          templateUrl: RESOURCE_ROOT +  'templates/home.html',
         }
       }
     })
 
-    // the router info for our account's details page
-    // Note we have a "accountId" state param available to our angular code
-    .state('tab.accounts-detail', {
-      url: '/account/:accountId',
-      views: {
-        'accounts-tab': {
-          templateUrl: RESOURCE_ROOT + 'templates/accountDetail.html'
-        }
-      }
-    })
 
-    .state('tab.accounts-contact-detail', {
-      url: '/account/:accountId/contact/:contactId',
-      views: {
-        'accounts-tab': {
-          templateUrl: RESOURCE_ROOT + 'templates/contactDetail.html'
+      .state('tab.outbox', {
+        url: '/outbox',
+        views: {
+          'settings-tab': {
+            templateUrl: RESOURCE_ROOT + 'templates/outbox.html',
+            controller: 'OutboxCtrl',
+            controllerAs: 'outboxControllerViewModel'
+          }
         }
-      }
-    })
-
-    .state('tab.accounts-newContact', {
-      url: '/account/:accountId/contact',
-      views: {
-        'accounts-tab': {
-          templateUrl: RESOURCE_ROOT + 'templates/newContact.html'
-        }
-      }
-    })
+      })
 
     /*****************************************************
      * S E T T I N G S    &    D E V    T O O L S
@@ -162,7 +182,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
   //
   // ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !  ! ! ! ! !
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/accounts');
+  $urlRouterProvider.otherwise('/tab/settings');
 
 }]);
 

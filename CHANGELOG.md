@@ -1,4 +1,20 @@
 
+### 0.0.3
+
+
+#### Bug Fixes
+
+* none
+
+#### Features
+
+* Updates for new shell v1.2.0
+
+#### Breaking Changes
+
+* none
+
+
 ### 0.0.2
 
 
