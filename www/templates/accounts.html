@@ -7,10 +7,18 @@
 
 	<ion-content>
 
+    <div class="item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="vm.search.query">
+      </label>
+      <button class="button button-clear icon ion-close-round" ng-click="vm.clearSearch()"></button>
+    </div>
+
     <ion-list>
 
       <ion-item class="item"
-        collection-repeat="account in vm.accounts" type="item-text-wrap"
+        collection-repeat="account in vm.accounts | filter:vm.search.query" type="item-text-wrap"
         >
         <h3>{{account.Name}}</h3>
       </ion-item>

@@ -21,8 +21,13 @@
   	angular.element(e).removeClass( "mc-hide" );
 
 
-  	var vm     = this,
-  			logTag = "AccountsCtrl";
+    var vm     = this,
+        logTag = "AccountsCtrl";
+
+    vm.search = {};
+
+    // exposed functions
+    vm.clearSearch = clearSearch;
 
 
     activate();
@@ -44,6 +49,15 @@
 
 			// Attempt to get our accounts
 			fetchAccounts();
+    }
+
+
+    /**
+     * @functionclearSearch
+     * @description clears search box
+     */
+    function clearSearch () {
+      vm.search.query = "";
     }
 
 
