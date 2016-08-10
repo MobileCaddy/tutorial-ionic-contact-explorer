@@ -1,0 +1,19 @@
+<ion-view  title="Contact Details" cache-view="false" >
+  <ion-nav-title>{{::vm.contact.Name}}</ion-nav-title>
+  <ion-content>
+    <div class="list card">
+
+      <div class="item">
+        <h2>{{::vm.contact.AccountName}}</h2>
+        <p>{{::vm.contact.Title}}</p>
+      </div>
+      <div ng-if="vm.contact.MobilePhone" class="item">
+        {{::vm.contact.MobilePhone}}
+      </div>
+      <div ng-if="vm.contact.Email" class="item">
+        {{::vm.contact.Email}}
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

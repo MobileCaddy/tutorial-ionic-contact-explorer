@@ -1,4 +1,4 @@
-<ion-view ng-controller="AccountCtrl" cache-view="false">
+<ion-view cache-view="false">
   <ion-nav-title>
     {{::vm.account.Name}} Contacts
   </ion-nav-title>
@@ -15,6 +15,7 @@
 
       <ion-item class="item mti-item"
         collection-repeat="contact in vmc.contacts | filter:vmc.search.query" type="item-text-wrap"
+        href="#/tab/account/{{vm.account.Id}}/contact/{{contact.Id}}"
         >
         <h3>{{contact.Name}}</h3>
         <p>{{contact.Title}}</p>

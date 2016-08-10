@@ -115,6 +115,20 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.services', 
     })
 
 
+    // the router info for our contact page
+    // Note we have a "accountId" state param available to our angular code
+    .state('tab.accounts-contact', {
+      url: '/account/:accountId/contact/:contactId',
+      views: {
+        'accounts-tab': {
+          templateUrl: RESOURCE_ROOT + 'templates/contact.html',
+          controller: 'ContactCtrl',
+          controllerAs: 'vm'
+        }
+      }
+    })
+
+
     .state('tab.outbox', {
       url: '/outbox',
       views: {

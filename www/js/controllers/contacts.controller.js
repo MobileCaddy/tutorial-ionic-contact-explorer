@@ -10,12 +10,12 @@
     .module('starter.controllers')
     .controller('ContactsCtrl', ContactsCtrl);
 
-  ContactsCtrl.$inject = ['$stateParams', 'ContactsService'];
+  ContactsCtrl.$inject = ['$scope', '$stateParams', 'ContactsService', 'logger'];
 
-  function ContactsCtrl($stateParams, ContactsService) {
+  function ContactsCtrl($scope, $stateParams, ContactsService, logger) {
 
     var vmc    = this,
-        logTag = "AccountsCtrl";
+        logTag = "ContactsCtrl";
 
     vmc.search = {};
 
@@ -31,8 +31,9 @@
       // the accountId, taken from the URL (stateparams) as in our app.js
       ContactsService.getForAccount($stateParams.accountId).then(function(contacts) {
         vmc.contacts = contacts;
+        $scope.$apply();
       }).catch(function(e) {
-        console.error('error', e);
+        logger.error(logTag, e);
       });
     }
 
