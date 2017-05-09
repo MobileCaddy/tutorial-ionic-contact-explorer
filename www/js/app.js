@@ -242,7 +242,13 @@ function myapp_callback(runUpInfo) {
     // Going to call a hardReset as an upgrade is available.
     console.debug('runUpInfo', runUpInfo);
     var vsnUtils= mobileCaddy.require('mobileCaddy/vsnUtils');
-    vsnUtils.hardReset();
+    vsnUtils.upgradeIfAvailable().then(function(){
+      // an upgrade will now begin in the background.
+    }).catch(function(e){
+      // if e === false then an upgrade is not available
+      // or cannot be run at present due to dirty tables
+      angular.bootstrap(document, ['starter']);
+    });
   } else {
     // carry on, nothing to see here
     angular.bootstrap(document, ['starter']);
